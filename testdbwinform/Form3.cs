@@ -105,7 +105,5 @@ namespace testdbwinform
                 MessageBox.Show(ex.Message);
             }
         }
-
-        
     }
 }

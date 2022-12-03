@@ -106,7 +106,7 @@ namespace testdbwinform
                 MessageBox.Show("셀이 비어있습니다. 값을 넣어주세요");
             }else if(check == 1)
             {
-                input_data(); // 데이터 업데이트
+                input_data(); // 데이터 추가
             }
         }
         // datafridview keydown 이벤트 시 다음 row로 이동하는 동작이 있음 (그냥 정보)
@@ -190,7 +190,7 @@ namespace testdbwinform
             }
             else
             {
-                commute = 0;
+                commute = 0;// 1은 tinyint의 false값
             }
             
         }
