@@ -34,6 +34,7 @@ namespace testdbwinform
         //
         private void Form3_Load(object sender, EventArgs e)
         {
+            if (DesignMode) return;
             conn = new MySqlConnection(connectionaddress); // 실행할 정보 셋팅
             conn.Open(); //MySql db 실행
             cmd = new MySqlCommand("", conn); // 쿼리문은 넣지 않고 일단 실행 -> 필요한 이벤트 처리기에서 쿼리문 설정.

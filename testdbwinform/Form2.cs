@@ -40,6 +40,7 @@ namespace testdbwinform
         //
         private void Form2_Load(object sender, EventArgs e)
         {
+            if (DesignMode) return;
             conn = new MySqlConnection(connectionaddress); // 실행할 정보 셋팅
             conn.Open(); //MySql db 실행
             cmd = new MySqlCommand("", conn); // 쿼리문은 넣지 않고 일단 실행 -> 필요한 이벤트 처리기에서 쿼리문 설정.
@@ -60,7 +61,9 @@ namespace testdbwinform
             if (e.KeyCode == Keys.Enter && String.IsNullOrWhiteSpace(textBox1.Text))  //텍스트 박스 텍스트가 없으면 Clear()
             {
                 //dataGridView1.Columns.Clear();
-                dataGridView1.DataSource = (dataGridView1.DataSource as DataTable).Clone();
+                dataGridView1.Rows[0].Cells[5].Value = "";
+                dataGridView1.Rows[0].Cells[3].Value = "";
+                MessageBox.Show("왜 안됨");
                 //((DataTable)dataGridView1.DataSource).Rows.Clear(); // 데이터 그리드 뷰의 모든 항목 지움 (컬렴명은 유지)
             }
             else if (e.KeyCode == Keys.Enter) // 텍스트 박스 길이가 3이 넘고 엔터를 쳐야지 실행됨.
@@ -113,9 +116,9 @@ namespace testdbwinform
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
             // 엔터키 이벤트와 datagridview의 값이 null이 아닌 경우 배달건수 확인
-            if (e.KeyCode == Keys.Enter && null != dataGridView1.Rows[1].Cells[5].Value)
+            if (e.KeyCode == Keys.Enter && null != dataGridView1.Rows[0].Cells[5].Value)
             {
-                deleveries = int.Parse(dataGridView1.Rows[1].Cells[5].Value.ToString()); // 배달 건수 int로 받음
+                deleveries = int.Parse(dataGridView1.Rows[0].Cells[5].Value.ToString()); // 배달 건수 int로 받음
                 // 시간당 배달건수 평균 3~5개인 것을 고려 파트타임 8시간 동안 휴식시간 1시간을 제외한 나머지 7시간 * 5 == 35건수 밥도 안먹고 8시간 동안 뛰었을 때 50개 가량이 가능하지만 일반적인 기준
                 // 이부분은 시스템에서 값을 받아와서 저장하는 것이 전제이고 값이 이상하게 찍힌 경우를 대비한 것. => 시스템 확인이 필요.
                 if (40 < deleveries)
@@ -125,47 +128,48 @@ namespace testdbwinform
                 else
                 {
                     commission = deleveries * 400; // 400은 고정 수수료 (건수 * 400 = 총수익)
-                    dataGridView1.Rows[1].Cells[5].Value = commission; //datagridview에 셋팅
+                    dataGridView1.Rows[0].Cells[5].Value = commission; //datagridview에 셋팅
                 }
             }
             // 비어있는 경우
-            else if(e.KeyCode == Keys.Enter && null == dataGridView1.Rows[1].Cells[4].Value)
+            else if(e.KeyCode == Keys.Enter && null == dataGridView1.Rows[0].Cells[5].Value)
             {
                 MessageBox.Show("배달건수가 비어있습니다.");
             }
             // 무사고 확인
-            if (e.KeyCode == Keys.Enter && null != dataGridView1.Rows[1].Cells[3].Value)
+            if (e.KeyCode == Keys.Enter && null != dataGridView1.Rows[0].Cells[3].Value)
             {
-                if (0 < dataGridView1.Rows[1].Cells[2].Value.ToString().Length)
+                if (0 < dataGridView1.Rows[0].Cells[2].Value.ToString().Length)
                 {
                     // 입력 문자가 X or O 일때만 입력 가능하도록
                     if ("X" == dataGridView1.Rows[1].Cells[3].Value.ToString() || "O" == dataGridView1.Rows[1].Cells[3].Value.ToString())
                         if(e.KeyCode == Keys.X) // x인 경우
                         {
-                            dataGridView1.Rows[1].Cells[3].Value = "무사고";
+                            dataGridView1.Rows[0].Cells[3].Value = "무사고";
                             accident = 0;
                         }
                         else
                         {
-                            dataGridView1.Rows[1].Cells[3].Value = "사고남";
+                            dataGridView1.Rows[0].Cells[3].Value = "사고남";
                             accident = 1;
                         }
                     else
                     {
-                        dataGridView1.Rows[1].Cells[3].Value = "";
+                        dataGridView1.Rows[0].Cells[3].Value = "";
                         MessageBox.Show("O 나 X 를 입력해주세요.");
                     }
                 }
                 else
                 {
-                    dataGridView1.Rows[1].Cells[3].Value = "";
+                    dataGridView1.Rows[0].Cells[3].Value = "";
                     MessageBox.Show("오늘의 무사고 여부를 확인해주세요.");
                 }
             }
-            else if (e.KeyCode == Keys.Enter && null == dataGridView1.Rows[1].Cells[5].Value.ToString())
+            else if (e.KeyCode == Keys.Enter && null == dataGridView1.Rows[0].Cells[3].Value)
             {
-                MessageBox.Show("배달건수가 비어있습니다.");
+                MessageBox.Show("무사고가 비어있습니다.");
             }
+
         }
         //
         // 커스텀 함수
