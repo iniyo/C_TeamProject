@@ -33,8 +33,8 @@ namespace testdbwinform
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.staffcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.now_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.now_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.accident_free = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.case_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,7 +56,7 @@ namespace testdbwinform
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(323, 45);
-            this.textBox1.MaxLength = 3;
+            this.textBox1.MaxLength = 5;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(108, 21);
             this.textBox1.TabIndex = 1;
@@ -65,11 +65,12 @@ namespace testdbwinform
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.staffcode,
-            this.now_time,
             this.name,
+            this.now_time,
             this.accident_free,
             this.date,
             this.case_number,
@@ -80,6 +81,7 @@ namespace testdbwinform
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(554, 62);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
             // staffcode
@@ -88,21 +90,22 @@ namespace testdbwinform
             this.staffcode.Name = "staffcode";
             this.staffcode.ReadOnly = true;
             // 
-            // now_time
-            // 
-            this.now_time.HeaderText = "현재시간";
-            this.now_time.Name = "now_time";
-            this.now_time.ReadOnly = true;
-            // 
             // name
             // 
             this.name.HeaderText = "사원명";
             this.name.Name = "name";
             this.name.ReadOnly = true;
             // 
+            // now_time
+            // 
+            this.now_time.HeaderText = "현재시간";
+            this.now_time.Name = "now_time";
+            this.now_time.ReadOnly = true;
+            // 
             // accident_free
             // 
             this.accident_free.HeaderText = "무사고여부";
+            this.accident_free.MaxInputLength = 1;
             this.accident_free.Name = "accident_free";
             // 
             // date
@@ -114,6 +117,7 @@ namespace testdbwinform
             // case_number
             // 
             this.case_number.HeaderText = "배달건수";
+            this.case_number.MaxInputLength = 2;
             this.case_number.Name = "case_number";
             // 
             // revenue
@@ -159,8 +163,8 @@ namespace testdbwinform
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn staffcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn now_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn now_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn accident_free;
         private System.Windows.Forms.DataGridViewTextBoxColumn date;
         private System.Windows.Forms.DataGridViewTextBoxColumn case_number;

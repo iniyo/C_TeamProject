@@ -34,7 +34,6 @@ namespace testdbwinform
         //
         private void Form3_Load(object sender, EventArgs e)
         {
-            if (DesignMode) return;
             conn = new MySqlConnection(connectionaddress); // 실행할 정보 셋팅
             conn.Open(); //MySql db 실행
             cmd = new MySqlCommand("", conn); // 쿼리문은 넣지 않고 일단 실행 -> 필요한 이벤트 처리기에서 쿼리문 설정.
@@ -52,13 +51,13 @@ namespace testdbwinform
             {
                 if (!String.IsNullOrWhiteSpace(textBox1.Text) && !String.IsNullOrWhiteSpace(textBox2.Text) && !String.IsNullOrWhiteSpace(textBox3.Text))
                 {
-                    if (2 < textBox1.Text.Length && 10 < textBox2.Text.Length && 7 < textBox3.Text.Length)
+                    if (2 < textBox1.Text.Length && 10 < textBox2.Text.Length && 5 < textBox3.Text.Length)
                     {
                         input_data(); // 데이터 입력
                     }
                     else
                     {
-                        MessageBox.Show(textBox1.Text + textBox2.Text + textBox3.Text);
+                        MessageBox.Show("입력을 확인해주세요");
                     }
                 }
                 else if (String.IsNullOrWhiteSpace(textBox1.Text))
