@@ -19,10 +19,14 @@ namespace testdbwinform
         //데이터 베이스 정보
         static string server = "localhost";
         static string databaes = "mydb";
-        static string port = "3308";
-        static string user = "root";
-        static string password = "!roottestdatabase23";
-        
+        //static string port = "3308";
+        //static string user = "root";
+        //static string password = "!roottestdatabase23";
+        // 공통 db 설정
+        static string port = "3306";
+        static string user = "test";
+        static string password = "1234";
+
         static string connectionaddress = $"Server={server};Port={port};Database={databaes};Uid={user};Pwd={password}";
         // datagridview 행 생성을 위한 table 객체
         DataTable table = new DataTable();
