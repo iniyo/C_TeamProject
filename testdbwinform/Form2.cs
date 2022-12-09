@@ -28,9 +28,13 @@ namespace testdbwinform
         //데이터 베이스 정보
         static string server = "localhost"; // local
         static string databaes = "mydb"; // db이름
-        static string port = "3308"; // port 3308 사용
-        static string user = "root"; // 사용자
-        static string password = "!roottestdatabase23"; // password
+        //static string port = "3308"; // port 3308 사용
+        //static string user = "root"; // 사용자
+        //static string password = "!roottestdatabase23"; // password
+        // 공통 db 설정
+        static string port = "3306";
+        static string user = "test";
+        static string password = "1234";
         // conn에 들어갈 정보
         static string connectionaddress = $"Server={server};Port={port};Database={databaes};Uid={user};Pwd={password}";
         // MySql db연동을 위해 필요
@@ -198,7 +202,7 @@ namespace testdbwinform
         {
             try
             {
-                string selectQuery = "SELECT * FROM sub_table_test where name = '" + textBox1.Text + " '"; // textBox1과 일치하는 값을 가진 테이블 내 행만 가지고 옴. (sub 데이터 베이스의 name 필드)
+                string selectQuery = "SELECT * FROM sub_table_test where name = " + '"' + textBox1.Text + '"'; // textBox1과 일치하는 값을 가진 테이블 내 행만 가지고 옴. (sub 데이터 베이스의 name 필드)
                 cmd.CommandText = selectQuery; // cmd에 쿼리 설정
                 //데이터 read
                 reader = cmd.ExecuteReader();
