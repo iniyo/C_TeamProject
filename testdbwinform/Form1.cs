@@ -52,7 +52,7 @@ namespace testdbwinform
             dataGridView1.ReadOnly = true; // 메인 datagridview읽기만 가능하도록 설정 
             cmd = new MySqlCommand("", conn); // 쿼리문은 넣지 않고 일단 실행 -> 필요한 이벤트 처리기에서 쿼리문 설정.
             connected(); // 연결되었는지 확인
-            Main_ListView_items_Reader(); //화면 메인 리스트 뷰에 데이터 받아오기
+            Main_ListView_items_Reader(DateTime.Now.ToString("yyyy-MM-dd")); //화면 메인 리스트 뷰에 데이터 받아오기
         }
         //
         //폼 동작
@@ -74,7 +74,7 @@ namespace testdbwinform
             {
                 if (e.KeyCode == Keys.Enter && String.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    Main_ListView_items_Reader(); //화면 메인 리스트 뷰에 데이터 받아오기
+                    Main_ListView_items_Reader(dateTimePicker1.Value.ToString("yyyy-MM-dd")); //화면 메인 리스트 뷰에 데이터 받아오기
                 }
             }
             catch (Exception ex)
@@ -87,17 +87,36 @@ namespace testdbwinform
             Form2 form2 = new Form2();
             form2.ShowDialog(); // 모달방식
         }
+        String delcode;
         private void button2_Click(object sender, EventArgs e) //삭제버튼 클릭시 이벤트
         {
-            if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            try
             {
-                dataGridView1.Rows.Remove(dataGridView1.Rows[rowselect]); // 해당되는 row 삭제
-                dataGridView2.Rows.Remove(dataGridView1.Rows[0]);// row 하나밖에 없으므로 0번째 행 삭제
+                // 행 선택 안됐을 경우
+                if(delcode == null) {
+                    MessageBox.Show("삭제를 원하는 행을 선택해주십시요", "삭제실패");
+                }
+                
+                else 
+                {
+                    if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        dataGridView1.Rows.Remove(dataGridView1.Rows[rowselect]); // 해당되는 row 삭제
+                                                                                  //dataGridView2.Rows.Remove(dataGridView1.Rows[0]);// row 하나밖에 없으므로 0번째 행 삭제
+                        DeleteDB(delcode); // 삭제 진행
+                        Main_ListView_items_Reader(dateTimePicker1.Value.ToString("yyyy-MM-dd")); // 삭제 후 테이블 띄우기
+                    }
+                }
+                
+
             }
-            else
+            catch
             {
-                MessageBox.Show("행이 선택되어있는지 확인해주세요");
+                MessageBox.Show("삭제를 원하는 행을 재선택 해주십시요", "삭제실패");
             }
+            
+
+
         }
         //사원추가 버튼
         private void button5_Click_1(object sender, EventArgs e)
@@ -119,6 +138,8 @@ namespace testdbwinform
                 s[i] = dataGridView1.Rows[e.RowIndex].Cells[i].Value.ToString();
             }
             dataGridView2.Rows.Add(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]);
+            delcode = s[0];
+            
         }
         //datafrideview1 클릭 이벤트 (delete처리)
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
@@ -126,6 +147,7 @@ namespace testdbwinform
             //delete키 누르면 싫행.
             if(e.KeyCode == Keys.Delete)
             {
+
                 if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     dataGridView1.Rows.Remove(dataGridView1.Rows[rowselect]); // 해당되는 row 삭제
@@ -144,7 +166,7 @@ namespace testdbwinform
             // staffcode 클릭 시 모든 사원들의 총수익이 보이도록
             if ("staffcode" == comboBox4.SelectedItem.ToString())
             {
-                mainquery();
+                mainquery(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
                 for (int i = 0; i < dataGridView1.ColumnCount; i++) //column개수 만큼 동작
                 {
                     while (mainreader.Read()) // 데이터 읽어와서 chart에 부착
@@ -197,11 +219,11 @@ namespace testdbwinform
         }
         //
         //커스텀 함수
-        //
-        private void mainquery()
+        // today => 원하는 날짜(선택된 날짜)
+        private void mainquery(String today)
         {
             // 데이터 가져와서 DataGridView에 설정
-            string selectQuery = "SELECT * FROM main_table_test"; // 전체 항목 읽어오기
+            string selectQuery = "SELECT * FROM main_table_test where date= "+"'"+today+"'"; // 전체 항목 읽어오기
             cmd.CommandText = selectQuery; // cmd에 쿼리 설정
             mainreader = cmd.ExecuteReader();
         }
@@ -212,13 +234,12 @@ namespace testdbwinform
             subreader = cmd.ExecuteReader();
         }
         // 메인 리스트 뷰에 전체 데이터 표시 (데이터 읽어오기)
-        private void Main_ListView_items_Reader()
+        private void Main_ListView_items_Reader(String today)
         {
-            
             dataGridView1.Rows.Clear(); // 데이터 그리드 뷰 초기화
             if (textBox1.Text == "")
             {
-                mainquery();
+                mainquery(today);
                 while (mainreader.Read())
                 {
                     dataGridView1.Rows.Add(mainreader["casecode"], mainreader["table2_staffcode"], "", mainreader["accident_free"], mainreader["case_number"], mainreader["date"], mainreader["commute"], mainreader["revenue"]);
@@ -284,81 +305,14 @@ namespace testdbwinform
         }
 
         //DELETE처리
-        public void DeleteDB()
+        public void DeleteDB(String code)
         {
-            string sql = "DELETE FROM main_table_test where casecode = '" + textBox1.Text + " '"; // datafridview 값이 필요.
+            string sql = "DELETE FROM main_table_test where casecode = '" + code + "'"; // datafridview 값이 필요.
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
         }
 
-        // 콤보박스 선택
-        int year;
-        int month;
-        int day;
 
-        // 년도
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            string yeart = comboBox1.SelectedItem.ToString();
-            yeart = yeart.Replace("년", "");
-            //MessageBox.Show(yeart);
-            year = int.Parse(yeart);    // 년도 값
-
-            comboBox2.Items.Clear();    // 초기화
-            for (int i = 1; i <= 12; i++)
-            {
-                comboBox2.Items.Add(i.ToString() + "월");
-            }
-            comboBox2.SelectedIndex = 0;
-        }
-        // 윤년포함 mounth
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string montht = comboBox2.SelectedItem.ToString();
-            montht = montht.Replace("월", "");
-            month = int.Parse(montht);  // 월 선택 값
-            comboBox3.Items.Add(montht);
-            comboBox3.Items.Clear();    // 초기화
-
-            int count;  // 일 개수
-
-            // 31일
-            if (month == 1 & month == 3 & month == 5 & month == 7 & month == 8 & month == 10 & month == 12)
-            {
-                count = 31;
-            }
-            else if (month == 2)
-            {
-                // 윤년
-                if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
-                {
-                    count = 29;
-                }
-
-                else
-                {
-                    count = 28;
-                }
-            }
-            // 30일
-            else
-            {
-                count = 30;
-            }
-
-            for (int i = 1; i <= count; i++)
-            {
-                comboBox3.Items.Add(i.ToString() + "일");
-            }
-        }
-        // Day
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string dayt = comboBox3.SelectedItem.ToString();
-            dayt = dayt.Replace("일", "");
-            day = int.Parse(dayt);  // 일 선택 값
-            MessageBox.Show(day.ToString());
-        }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -375,6 +329,26 @@ namespace testdbwinform
             {
                 label2.Text = "DisConnected"; // 연결 불가시
             }
+        }
+
+        // 날짜 선택 데이터
+        int year;
+        int month;
+        int day;
+        String dateSet;
+        
+        
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime SelectDate = dateTimePicker1.Value;
+            dateSet = SelectDate.ToString("yyyy-MM-dd");
+            year = SelectDate.Year;
+            month = SelectDate.Month;
+            day = SelectDate.Day;
+
+            //MessageBox.Show(SelectDate.ToString());
+
+            Main_ListView_items_Reader(dateSet);
         }
     }
 }
