@@ -28,7 +28,7 @@ case_number char(45),
 date DATE,
 revenue char(45),
 commute tinyint,
-foreingn key(table2_staffcode) references sub_table_test (staffcode)
+foreign key(table2_staffcode) references sub_table_test (staffcode)
 );
 
 // 이미 테이블이 존재하는 경우 외래키 설정
