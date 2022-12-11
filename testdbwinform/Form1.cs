@@ -38,9 +38,6 @@ namespace testdbwinform
         public Form1()
         {
             InitializeComponent();
-            /*// 임의 난수 생성
-            Random randomObj = new Random();
-            int randomValue = randomObj.Next();*/
         }
         /////폼 동작
         
@@ -104,7 +101,6 @@ namespace testdbwinform
                 if(delcode == null) {
                     MessageBox.Show("삭제를 원하는 행을 선택해주십시요", "삭제실패");
                 }
-                
                 else 
                 {
                     if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -116,16 +112,11 @@ namespace testdbwinform
                         dataGridView2.Rows.Clear();
                     }
                 }
-                
-
             }
             catch
             {
                 MessageBox.Show("삭제를 원하는 행을 재선택 해주십시요", "삭제실패");
             }
-            
-
-
         }
         //사원추가 버튼
         private void button5_Click_1(object sender, EventArgs e)
@@ -160,7 +151,6 @@ namespace testdbwinform
                 if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     dataGridView1.Rows.Remove(dataGridView1.Rows[rowselect]); // 해당되는 row 삭제
-                    dataGridView2.Rows.Remove(dataGridView1.Rows[0]);// row 하나밖에 없으므로 0번째 행 삭제
                 }
                 else
                 {
@@ -373,7 +363,6 @@ namespace testdbwinform
                     dataGridView1.Rows[i].Cells[6].Value = "정상퇴근";
                 else if (dataGridView1.Rows[i].Cells[6].Value.ToString() == "0")
                     dataGridView1.Rows[i].Cells[6].Value = "시간초과";
-
             }
             // 가져온 staffcode와 일치하면 이름을 위치에 넣음
             // subreader
@@ -481,13 +470,6 @@ namespace testdbwinform
             cmd.ExecuteNonQuery();
         }
 
-
-
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-            //textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-        }
         private void connected() //연결 되는지 확인
         {
             if (conn.State == ConnectionState.Open) // 데이터소스가 현재 연결상태인지 확인
