@@ -29,9 +29,9 @@ namespace testdbwinform
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -46,14 +46,6 @@ namespace testdbwinform
             this.commute = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.revenue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.casecode2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.table2_staffcode2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.staffname2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.accident2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.case_number2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.date2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commute2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.revenue2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
@@ -62,6 +54,14 @@ namespace testdbwinform
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.staffcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accdent2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.casenumber2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commute2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.revenue2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -72,10 +72,9 @@ namespace testdbwinform
             this.button1.BackColor = System.Drawing.Color.Black;
             this.button1.Font = new System.Drawing.Font("굴림", 12F);
             this.button1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(41, 146);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(29, 97);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 63);
+            this.button1.Size = new System.Drawing.Size(82, 42);
             this.button1.TabIndex = 3;
             this.button1.Text = "실적추가";
             this.button1.UseVisualStyleBackColor = false;
@@ -85,10 +84,9 @@ namespace testdbwinform
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("굴림", 15F);
-            this.label1.Location = new System.Drawing.Point(36, 88);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(25, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 30);
+            this.label1.Size = new System.Drawing.Size(49, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "날짜";
             // 
@@ -98,10 +96,9 @@ namespace testdbwinform
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button2.Font = new System.Drawing.Font("굴림", 12F);
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(191, 146);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(134, 97);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 63);
+            this.button2.Size = new System.Drawing.Size(82, 42);
             this.button2.TabIndex = 5;
             this.button2.Text = "실적삭제";
             this.button2.UseVisualStyleBackColor = false;
@@ -110,10 +107,9 @@ namespace testdbwinform
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(616, 10);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(431, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 18);
+            this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 8;
             this.label2.Text = "연결확인용";
             // 
@@ -130,12 +126,11 @@ namespace testdbwinform
             this.date,
             this.commute,
             this.revenue});
-            this.dataGridView1.Location = new System.Drawing.Point(41, 248);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Location = new System.Drawing.Point(29, 165);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(804, 256);
+            this.dataGridView1.Size = new System.Drawing.Size(563, 171);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
@@ -201,70 +196,181 @@ namespace testdbwinform
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.casecode2,
-            this.table2_staffcode2,
-            this.staffname2,
-            this.accident2,
-            this.case_number2,
-            this.date2,
+            this.staffcode,
+            this.name2,
+            this.tel,
+            this.addr,
+            this.accdent2,
+            this.casenumber2,
             this.commute2,
             this.revenue2});
-            this.dataGridView2.Location = new System.Drawing.Point(41, 560);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.Location = new System.Drawing.Point(29, 373);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 62;
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(804, 93);
+            this.dataGridView2.Size = new System.Drawing.Size(563, 62);
             this.dataGridView2.TabIndex = 14;
             // 
-            // casecode2
+            // textBox1
             // 
-            this.casecode2.HeaderText = "code";
-            this.casecode2.MinimumWidth = 8;
-            this.casecode2.Name = "casecode2";
-            this.casecode2.ReadOnly = true;
-            this.casecode2.Width = 150;
+            this.textBox1.Location = new System.Drawing.Point(584, 58);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(278, 21);
+            this.textBox1.TabIndex = 15;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // table2_staffcode2
+            // label3
             // 
-            this.table2_staffcode2.HeaderText = "staffcode";
-            this.table2_staffcode2.MinimumWidth = 8;
-            this.table2_staffcode2.Name = "table2_staffcode2";
-            this.table2_staffcode2.ReadOnly = true;
-            this.table2_staffcode2.Width = 150;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("굴림", 15F);
+            this.label3.Location = new System.Drawing.Point(497, 59);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label3.Size = new System.Drawing.Size(63, 20);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "검색 :";
             // 
-            // staffname2
+            // button5
             // 
-            this.staffname2.HeaderText = "사원명";
-            this.staffname2.MinimumWidth = 8;
-            this.staffname2.Name = "staffname2";
-            this.staffname2.ReadOnly = true;
-            this.staffname2.Width = 150;
+            this.button5.BackColor = System.Drawing.Color.Black;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button5.Font = new System.Drawing.Font("굴림", 12F);
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(244, 97);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(82, 42);
+            this.button5.TabIndex = 17;
+            this.button5.Text = "사원추가";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
             // 
-            // accident2
+            // chart1
             // 
-            this.accident2.HeaderText = "무사고 여부";
-            this.accident2.MinimumWidth = 8;
-            this.accident2.Name = "accident2";
-            this.accident2.ReadOnly = true;
-            this.accident2.Width = 150;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(639, 165);
+            this.chart1.Name = "chart1";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            series2.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(223, 270);
+            this.chart1.TabIndex = 18;
+            this.chart1.Text = "사원정보";
             // 
-            // case_number2
+            // comboBox4
             // 
-            this.case_number2.HeaderText = "배달건수";
-            this.case_number2.MinimumWidth = 8;
-            this.case_number2.Name = "case_number2";
-            this.case_number2.ReadOnly = true;
-            this.case_number2.Width = 150;
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.Font = new System.Drawing.Font("굴림", 11F);
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "staffcode",
+            "무사고여부",
+            "배달건수",
+            "출/퇴근",
+            "수익률"});
+            this.comboBox4.Location = new System.Drawing.Point(639, 125);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(106, 23);
+            this.comboBox4.TabIndex = 19;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
-            // date2
+            // comboBox5
             // 
-            this.date2.HeaderText = "날짜";
-            this.date2.MinimumWidth = 8;
-            this.date2.Name = "date2";
-            this.date2.ReadOnly = true;
-            this.date2.Width = 150;
+            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox5.Font = new System.Drawing.Font("굴림", 11F);
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Items.AddRange(new object[] {
+            "Line",
+            "Column",
+            "Point",
+            "Pie",
+            "Doughnut"});
+            this.comboBox5.Location = new System.Drawing.Point(756, 125);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(106, 23);
+            this.comboBox5.TabIndex = 20;
+            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox5_SelectedIndexChanged);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(96, 60);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(241, 21);
+            this.dateTimePicker1.TabIndex = 21;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "사건번호",
+            "사원코드",
+            "사원명",
+            "무사고 여부",
+            "배달건수",
+            "출/퇴근",
+            "수익"});
+            this.comboBox1.Location = new System.Drawing.Point(584, 29);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(86, 20);
+            this.comboBox1.TabIndex = 22;
+            // 
+            // staffcode
+            // 
+            this.staffcode.HeaderText = "staffcode";
+            this.staffcode.MinimumWidth = 8;
+            this.staffcode.Name = "staffcode";
+            this.staffcode.ReadOnly = true;
+            this.staffcode.Width = 150;
+            // 
+            // name2
+            // 
+            this.name2.HeaderText = "사원명";
+            this.name2.MinimumWidth = 8;
+            this.name2.Name = "name2";
+            this.name2.ReadOnly = true;
+            this.name2.Width = 150;
+            // 
+            // tel
+            // 
+            this.tel.HeaderText = "전화번호";
+            this.tel.MinimumWidth = 8;
+            this.tel.Name = "tel";
+            this.tel.ReadOnly = true;
+            this.tel.Width = 150;
+            // 
+            // addr
+            // 
+            this.addr.HeaderText = "주소";
+            this.addr.MinimumWidth = 8;
+            this.addr.Name = "addr";
+            this.addr.ReadOnly = true;
+            this.addr.Width = 150;
+            // 
+            // accdent2
+            // 
+            this.accdent2.HeaderText = "무사고 여부";
+            this.accdent2.MinimumWidth = 8;
+            this.accdent2.Name = "accdent2";
+            this.accdent2.ReadOnly = true;
+            this.accdent2.Width = 150;
+            // 
+            // casenumber2
+            // 
+            this.casenumber2.HeaderText = "배달건수";
+            this.casenumber2.MinimumWidth = 8;
+            this.casenumber2.Name = "casenumber2";
+            this.casenumber2.ReadOnly = true;
+            this.casenumber2.Width = 150;
             // 
             // commute2
             // 
@@ -282,127 +388,11 @@ namespace testdbwinform
             this.revenue2.ReadOnly = true;
             this.revenue2.Width = 150;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(834, 87);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(395, 28);
-            this.textBox1.TabIndex = 15;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("굴림", 15F);
-            this.label3.Location = new System.Drawing.Point(710, 88);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label3.Size = new System.Drawing.Size(93, 30);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "검색 :";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.Black;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.Font = new System.Drawing.Font("굴림", 12F);
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(349, 146);
-            this.button5.Margin = new System.Windows.Forms.Padding(4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(117, 63);
-            this.button5.TabIndex = 17;
-            this.button5.Text = "사원추가";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
-            // 
-            // chart1
-            // 
-            chartArea8.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.chart1.Legends.Add(legend8);
-            this.chart1.Location = new System.Drawing.Point(913, 248);
-            this.chart1.Margin = new System.Windows.Forms.Padding(4);
-            this.chart1.Name = "chart1";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            series8.YValuesPerPoint = 2;
-            this.chart1.Series.Add(series8);
-            this.chart1.Size = new System.Drawing.Size(319, 405);
-            this.chart1.TabIndex = 18;
-            this.chart1.Text = "사원정보";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.Font = new System.Drawing.Font("굴림", 11F);
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "staffcode",
-            "무사고여부",
-            "배달건수",
-            "출/퇴근",
-            "수익률"});
-            this.comboBox4.Location = new System.Drawing.Point(913, 188);
-            this.comboBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(150, 30);
-            this.comboBox4.TabIndex = 19;
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.Font = new System.Drawing.Font("굴림", 11F);
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
-            "Line",
-            "Column",
-            "Point",
-            "Pie",
-            "Doughnut"});
-            this.comboBox5.Location = new System.Drawing.Point(1080, 188);
-            this.comboBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(150, 30);
-            this.comboBox5.TabIndex = 20;
-            this.comboBox5.SelectedIndexChanged += new System.EventHandler(this.comboBox5_SelectedIndexChanged);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(137, 90);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(342, 28);
-            this.dateTimePicker1.TabIndex = 21;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "사건번호",
-            "사원코드",
-            "사원명",
-            "무사고 여부",
-            "배달건수",
-            "출/퇴근",
-            "수익"});
-            this.comboBox1.Location = new System.Drawing.Point(834, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 26);
-            this.comboBox1.TabIndex = 22;
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1263, 722);
+            this.ClientSize = new System.Drawing.Size(884, 481);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.comboBox5);
@@ -417,7 +407,6 @@ namespace testdbwinform
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -451,16 +440,16 @@ namespace testdbwinform
         private System.Windows.Forms.DataGridViewTextBoxColumn revenue;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn casecode2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn table2_staffcode2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn staffname2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accident2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn case_number2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn date2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commute2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn revenue2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn staffcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accdent2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn casenumber2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commute2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn revenue2;
     }
 }
 
