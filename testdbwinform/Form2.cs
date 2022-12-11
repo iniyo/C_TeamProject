@@ -247,7 +247,7 @@ namespace testdbwinform
                 int minute = int.Parse(hour_minute[1]);
 
                 // 00~8, 8~14, 14~00
-                if (hour == 0 || hour == 7 && minute >= 50 || hour == 8 || hour == 9 && minute >= 50 || hour == 13 && minute >= 50 || hour == 14 || hour == 15 && minute >= 50)
+                if (hour == 23 && minute >= 50 || hour == 0 && 10 <= minute || hour == 7 && minute >= 50 || hour == 8 && minute <= 10 || hour == 13 && minute >= 50 || hour == 14 && 10 <= minute)
                 {
                     commute = 1; // 1은 tinyint의 true값
                 }
