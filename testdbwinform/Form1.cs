@@ -19,13 +19,13 @@ namespace testdbwinform
         //데이터 베이스 정보
         static string server = "localhost";
         static string databaes = "mydb";
-        //static string port = "3308";
-        //static string user = "root";
-        //static string password = "!roottestdatabase23";
+        static string port = "3308";
+        static string user = "root";
+        static string password = "!roottestdatabase23";
         // 공통 db 설정
-        static string port = "3306";
-        static string user = "test";
-        static string password = "1234";
+        //static string port = "3306";
+        //static string user = "test";
+        //static string password = "1234";
 
         static string connectionaddress = $"Server={server};Port={port};Database={databaes};Uid={user};Pwd={password}";
         // datagridview 행 생성을 위한 table 객체
@@ -35,12 +35,13 @@ namespace testdbwinform
         MySqlCommand cmd; // 쿼리문 설정, 실행
         MySqlDataReader mainreader; // 서버에서 데이터 가져오기 설정
         MySqlDataReader subreader; // 서버에서 데이터 가져오기 설정
+
         public Form1()
         {
             InitializeComponent();
         }
         /////폼 동작
-        
+
         // 폼이 시작되며 DB를 연결 시킨다.
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -50,7 +51,7 @@ namespace testdbwinform
             cmd = new MySqlCommand("", conn); // 쿼리문은 넣지 않고 일단 실행 -> 필요한 이벤트 처리기에서 쿼리문 설정.
             connected(); // 연결되었는지 확인
             Main_ListView_items_Reader(DateTime.Now.ToString("yyyy-MM-dd")); //화면 메인 리스트 뷰에 데이터 받아오기
-            comboBox1.SelectedIndex=0;
+            comboBox1.SelectedIndex = 0;
         }
         //
         //폼 동작
@@ -72,13 +73,13 @@ namespace testdbwinform
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    if(String.IsNullOrEmpty(textBox1.Text))
+                    if (String.IsNullOrEmpty(textBox1.Text))
                     {
                         MessageBox.Show("값을 입력해주십시요", "검색 실패");
                     }
                     else
                     {
-                    Search(textBox1.Text); //화면 메인 리스트 뷰에 데이터 받아오기
+                        Search(textBox1.Text); //화면 메인 리스트 뷰에 데이터 받아오기
                     }
                 }
             }
@@ -89,7 +90,7 @@ namespace testdbwinform
         }
         private void button1_Click(object sender, EventArgs e) //추가버튼 클릭시 이동 이벤트
         {
-            Form2 form2 = new Form2();
+            Form2 form2 = new Form2(this);
             form2.ShowDialog(); // 모달방식
         }
         String delcode;
@@ -98,10 +99,11 @@ namespace testdbwinform
             try
             {
                 // 행 선택 안됐을 경우
-                if(delcode == null) {
+                if (delcode == null)
+                {
                     MessageBox.Show("삭제를 원하는 행을 선택해주십시요", "삭제실패");
                 }
-                else 
+                else
                 {
                     if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -129,23 +131,72 @@ namespace testdbwinform
         {
             rowselect = e.RowIndex; // 현재 선택된 행값을 가져옴.
             string[] s = new string[8];
-            if(dataGridView2.RowCount > 0) // 이미 있는 경우는 삭제
+            if (dataGridView2.RowCount > 0) // 이미 있는 경우는 삭제
             {
                 dataGridView2.Rows.Remove(dataGridView2.Rows[0]); // 해당되는 row 삭제
             }
-            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            subquery(); // 사원 테이블
+
+            while (subreader.Read()) // 데이터 읽어와서 chart에 부착
             {
-                s[i] = dataGridView1.Rows[e.RowIndex].Cells[i].Value.ToString();
+                if (dataGridView1.Rows[rowselect].Cells[1].Value.ToString() == subreader["staffcode"].ToString())
+                {
+                    s[0] = subreader["staffcode"].ToString();
+                    s[1] = subreader["name"].ToString();
+                    s[2] = subreader["tel"].ToString();
+                    s[3] = subreader["addr"].ToString();
+                }
             }
+            subreader.Close();
+            // 데이터 가져와서 DataGridView에 설정
+
+            string selectQuery = "SELECT * FROM main_table_test where table2_staffcode= " + "'" + s[0] + "'"; // 전체 항목 읽어오기
+            cmd.CommandText = selectQuery; // cmd에 쿼리 설정
+            mainreader = cmd.ExecuteReader();
+            // sttafcode와 일치하는 모든 데이터의 값을 더해서 보여줌
+            int sum1 = 0; // 배달건수 합계
+            int sum2 = 0; // 합계 도
+            int b = 3;
+            while (mainreader.Read())
+            {
+                // 무사고 여부
+                if ("1" == mainreader["accident_free"].ToString())
+                {
+                    s[4] = "사고";
+                }
+                else
+                {
+                    s[4] = "무사고";
+                }
+                // 배달건수 
+                b += 3;
+                sum1 += int.Parse(mainreader["case_number"].ToString());
+                s[5] = sum1.ToString();
+                // 츨/퇴근
+                if ("1" == mainreader["commute"].ToString())
+                {
+                    s[6] = "정상";
+                }
+                else
+                {
+                    s[6] = "시간초과";
+                }
+                // 총 수익
+                sum2 = int.Parse(mainreader["revenue"].ToString());
+                sum2 += sum2;
+                s[7] = sum2.ToString();
+                mainreader["revenue"].ToString();
+            }
+
+            mainreader.Close();
             dataGridView2.Rows.Add(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]);
-            delcode = s[0];
-            
+            delcode = dataGridView1.Rows[rowselect].Cells[0].Value.ToString(); // datagridview 1의 선택된 행의 caseNo를 담음
         }
         //datafrideview1 클릭 이벤트 (delete처리)
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
             //delete키 누르면 싫행.
-            if(e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
 
                 if (MessageBox.Show("정말 삭제하시겠습니까?", "YesOrNo", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -178,16 +229,19 @@ namespace testdbwinform
                 }
                 mainreader.Close(); // 항상 사용 후 종료
             }
-            else if("무사고여부" == comboBox4.SelectedItem.ToString())
+            else if ("무사고여부" == comboBox4.SelectedItem.ToString())
             {
 
-            }else if("배달건수" == comboBox4.SelectedItem.ToString())
+            }
+            else if ("배달건수" == comboBox4.SelectedItem.ToString())
             {
 
-            }else if("출/퇴근" == comboBox4.SelectedItem.ToString())
+            }
+            else if ("출/퇴근" == comboBox4.SelectedItem.ToString())
             {
 
-            }else if("수익률" == comboBox4.SelectedItem.ToString())
+            }
+            else if ("수익률" == comboBox4.SelectedItem.ToString())
             {
 
             }
@@ -222,7 +276,7 @@ namespace testdbwinform
         private void mainquery(String today)
         {
             // 데이터 가져와서 DataGridView에 설정
-            string selectQuery = "SELECT * FROM main_table_test where date= "+"'"+today+"'"; // 전체 항목 읽어오기
+            string selectQuery = "SELECT * FROM main_table_test where date= " + "'" + today + "'"; // 전체 항목 읽어오기
             cmd.CommandText = selectQuery; // cmd에 쿼리 설정
             mainreader = cmd.ExecuteReader();
         }
@@ -243,18 +297,18 @@ namespace testdbwinform
         {
             String syntex = "";
             // 데이터 가져와서 DataGridView에 설정
-            for(int i = 0; i < data.Count; i++)
+            for (int i = 0; i < data.Count; i++)
             {
-                if(i == data.Count-1)
+                if (i == data.Count - 1)
                 {
                     syntex += data[i];
                 }
                 else
                 {
-                syntex += data[i] + " or ";
+                    syntex += data[i] + " or ";
                 }
             }
-            string selectQuery = "SELECT * FROM main_table_test where " + field + "= " +  syntex;
+            string selectQuery = "SELECT * FROM main_table_test where " + field + "= " + syntex;
             cmd.CommandText = selectQuery; // cmd에 쿼리 설정
             mainreader = cmd.ExecuteReader();
         }
@@ -271,7 +325,7 @@ namespace testdbwinform
             }
             subreader.Close();
             return namelist;
-        } 
+        }
         // 메인 리스트 뷰에 전체 데이터 표시 (데이터 읽어오기)
         private void Main_ListView_items_Reader(String today)
         {
@@ -294,11 +348,11 @@ namespace testdbwinform
                         dataGridView1.Rows[i].Cells[6].Value = "정상퇴근";
                     else if (dataGridView1.Rows[i].Cells[6].Value.ToString() == "0")
                         dataGridView1.Rows[i].Cells[6].Value = "시간초과";
-                    
+
                 }
                 // 가져온 staffcode와 일치하면 이름을 위치에 넣음
                 // subreader
-                
+
                 // 비교문을 돌려서 staffcode와 일치하면 이름을 가져와서 적용함.
                 for (int i = 0; i < dataGridView1.RowCount; i++) //Row개수 만큼 동작
                 {
@@ -332,22 +386,49 @@ namespace testdbwinform
                 {
                     MessageBox.Show(e.Message); // 에러 메시지 출력
                 }
-            }          
+            }
         }
+        // 폼 통신용
+        public void setGridView(string staffcode, string caseNo)
+        {
+            bool t = true;
+            for (int i = 0; i < dataGridView1.RowCount; i++) //Row개수 만큼 동작
+            {
+                if (dataGridView1.Rows[i].Cells[1].Value.ToString() == staffcode)
+                {
+                    t = true;
+                    break;
+                }
+                else
+                {
+                    t = false;
+                }
+            }
+            if (t)
+            {
+                DeleteDB(caseNo); // 삭제 진행
+                MessageBox.Show("오늘은 이미 실적추가를 했습니다.");
+            }
+            else
+            {
+                MessageBox.Show("전송완료");
+                Main_ListView_items_Reader(dateTimePicker1.Value.ToString("yyyy-MM-dd")); // 테이블 띄우기
+            }
 
-        private void SearchData(String field,String data)
+        }
+        private void SearchData(String field, String data)
         {
             // 이름필드 - 테이블이 달라서 따로 서치
-            if(field == "name")
+            if (field == "name")
             {
                 field = "table2_staffcode";
                 searchnamequery(field, searchname(data));
             }
             else
             {
-            searchquery(field, data);
+                searchquery(field, data);
             }
-            
+
             while (mainreader.Read())
             {
                 dataGridView1.Rows.Add(mainreader["casecode"], mainreader["table2_staffcode"], "", mainreader["accident_free"], mainreader["case_number"], mainreader["date"], mainreader["commute"], mainreader["revenue"]);
@@ -387,8 +468,8 @@ namespace testdbwinform
         {
             dataGridView1.Rows.Clear(); // 데이터 그리드 뷰 초기화
             String selectdata = comboBox1.SelectedItem.ToString();
-            
-            if(data == null)
+
+            if (data == null)
             {
                 return;
             }
@@ -400,7 +481,7 @@ namespace testdbwinform
 
             }
             // 사원코드
-            else if(selectdata.Equals("사원코드"))
+            else if (selectdata.Equals("사원코드"))
             {
                 selectdata = "table2_staffcode";
                 SearchData(selectdata, data);
@@ -415,11 +496,11 @@ namespace testdbwinform
             else if (selectdata.Equals("무사고 여부"))
             {
                 selectdata = "accident_free";
-                if(data == "무사고")
+                if (data == "무사고")
                 {
                     data = "0";
                 }
-                else if(data == "사고")
+                else if (data == "사고")
                 {
                     data = "1";
                 }
@@ -435,11 +516,11 @@ namespace testdbwinform
             else if (selectdata.Equals("출/퇴근"))
             {
                 selectdata = "commute";
-                if(data == "정상퇴근")
+                if (data == "정상퇴근")
                 {
-                    data= "1";
+                    data = "1";
                 }
-                else if(data == "시간초과")
+                else if (data == "시간초과")
                 {
                     data = "0";
                 }
@@ -465,7 +546,7 @@ namespace testdbwinform
         //DELETE처리
         public void DeleteDB(String code)
         {
-            string sql = "DELETE FROM main_table_test where casecode = '" + code + "'"; // datafridview 값이 필요.
+            string sql = "DELETE FROM main_table_test where casecode = '" + code + "'"; // datagridview 값이 필요.
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
         }
@@ -487,8 +568,8 @@ namespace testdbwinform
         int month;
         int day;
         String dateSet;
-        
-        
+
+
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             DateTime SelectDate = dateTimePicker1.Value;
