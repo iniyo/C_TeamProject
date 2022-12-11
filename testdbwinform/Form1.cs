@@ -19,13 +19,13 @@ namespace testdbwinform
         //데이터 베이스 정보
         static string server = "localhost";
         static string databaes = "mydb";
-        static string port = "3308";
-        static string user = "root";
-        static string password = "!roottestdatabase23";
+        //static string port = "3308";
+        //static string user = "root";
+        //static string password = "!roottestdatabase23";
         // 공통 db 설정
-        //static string port = "3306";
-        //static string user = "test";
-        //static string password = "1234";
+        static string port = "3306";
+        static string user = "test";
+        static string password = "1234";
 
         static string connectionaddress = $"Server={server};Port={port};Database={databaes};Uid={user};Pwd={password}";
         // datagridview 행 생성을 위한 table 객체
@@ -552,6 +552,13 @@ namespace testdbwinform
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.ExecuteNonQuery();
         }
+        // Delete 사원
+        public void DeleteSubDB(String code)
+        {
+            string sql = "DELETE FROM sub_table_test where staffcode = '" + code + "'"; // datagridview 값이 필요.
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+        }
 
         private void connected() //연결 되는지 확인
         {
@@ -583,6 +590,79 @@ namespace testdbwinform
             //MessageBox.Show(SelectDate.ToString());
             textBox1.Text = "";
             Main_ListView_items_Reader(dateSet);
+        }
+
+        // 사원 삭제
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            String staffcode = "?";
+            if (InputBox("사원코드 입력 - 삭제", "staffcode를 입력해주세요", ref staffcode) == DialogResult.OK)
+            {
+                try
+                {
+                    string selectQuery = "SELECT * FROM sub_table_test where staffcode= " + "'" + staffcode + "'";
+                    cmd.CommandText = selectQuery; // cmd에 쿼리 설정
+                    subreader = cmd.ExecuteReader();
+                    List<String> codeList = new List<String>();
+                    while (subreader.Read())
+                    {
+                        codeList.Add(subreader["staffcode"].ToString());
+                    }
+                    subreader.Close();
+                    if(codeList.Count == 0)
+                    {
+                        MessageBox.Show("존재하지 않는 회원입니다.", "삭제 실패");
+                    }
+                    else
+                    {
+                        DeleteSubDB(staffcode);
+                        MessageBox.Show("삭제되었습니다", "삭제 성공");
+                    }
+
+                }
+                catch
+                {
+                    MessageBox.Show("존재하지 않는 회원입니다.", "삭제 실패");
+                }
+            }
+        }
+        // 오픈소스 - https://076923.github.io/exercise/C-inputbox/
+        public static DialogResult InputBox(string title, string content, ref string value)
+        {
+            Form form = new Form();
+
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.ClientSize = new Size(300, 100);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MaximizeBox = false;
+            form.MinimizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            form.Text = title;
+            label.Text = content;
+            textBox.Text = value;
+            buttonOk.Text = "확인";
+            buttonCancel.Text = "취소";
+
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+            label.SetBounds(25, 17, 200, 20);
+            textBox.SetBounds(25, 40, 220, 20);
+            buttonOk.SetBounds(95, 70, 70, 20);
+            buttonCancel.SetBounds(175, 70, 70, 20);
+
+            DialogResult dialogResult = form.ShowDialog();
+
+            value = textBox.Text;
+            return dialogResult;
         }
     }
 }

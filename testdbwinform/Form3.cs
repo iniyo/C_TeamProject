@@ -55,27 +55,25 @@ namespace testdbwinform
             {
                 if (!String.IsNullOrWhiteSpace(textBox1.Text) && !String.IsNullOrWhiteSpace(textBox2.Text) && !String.IsNullOrWhiteSpace(textBox3.Text))
                 {
-                    if (2 < textBox1.Text.Length && 10 < textBox2.Text.Length && 5 < textBox3.Text.Length)
+                    if(textBox2.Text[3] != '-' || textBox2.Text[8] != '-')
                     {
-                        input_data(); // 데이터 입력
+                        MessageBox.Show("010-xxxx-xxxx 형식으로 입력 해 주십시요", "전화번호 양식 오류");
+                    }
+                    else if(textBox3.Text.Length < 7)
+                    {
+                        MessageBox.Show("주소를 확인해주세요(7글자 이상)", "주소 양식 오류");
                     }
                     else
                     {
-                        MessageBox.Show("입력을 확인해주세요");
+                        input_data(); // 데이터 입력
+                        this.Close();   // 완료 시 폼 종료
                     }
+                    
                 }
-                else if (String.IsNullOrWhiteSpace(textBox1.Text))
-                    MessageBox.Show("이름을 입력해주세요");
-                else if (3 > textBox1.Text.Length)
-                    MessageBox.Show("이름을 확인해주세요");
-                else if (String.IsNullOrWhiteSpace(textBox2.Text))
-                    MessageBox.Show("전화번호를 입력해주세요");
-                else if (10 > textBox2.Text.Length)
-                    MessageBox.Show("전화번호를 확인해주세요 '-' 제외");
-                else if (String.IsNullOrWhiteSpace(textBox3.Text))
-                    MessageBox.Show("주소를 입력해주세요");
-                else if (7 > textBox3.Text.Length)
-                    MessageBox.Show("주소를 확인해주세요");
+                else
+                {
+                    MessageBox.Show("정보를 입력해주세요", "미입력오류");
+                }
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -91,7 +89,7 @@ namespace testdbwinform
             string tel = textBox2.Text; // 전화번호
             string addr = textBox3.Text.Trim(); // 주소
             //INSERT INTO 쿼리문으로 받아온 정보를 DB에 전송한다. 
-            string selectQuery = $"INSERT INTO sub_table_test(name,tel,addr) VALUES  ('{name}',{tel},'{addr}')";
+            string selectQuery = "INSERT INTO sub_table_test(name,tel,addr) VALUES  ('"+ name +"'" +", '"+tel+"'" + ", '"+addr+"')";
 
             //DB전송을 진행하고 실패시 에러메세지 출력
             try

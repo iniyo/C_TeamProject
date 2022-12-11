@@ -44,7 +44,7 @@ namespace testdbwinform
             this.button1.BackColor = System.Drawing.Color.DarkTurquoise;
             this.button1.Font = new System.Drawing.Font("한컴 말랑말랑 Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button1.Location = new System.Drawing.Point(511, 176);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 172);
             this.button1.TabIndex = 0;
@@ -92,14 +92,14 @@ namespace testdbwinform
             this.label4.Location = new System.Drawing.Point(57, 238);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(173, 30);
+            this.label4.Size = new System.Drawing.Size(172, 30);
             this.label4.TabIndex = 4;
-            this.label4.Text = "전화번호(-)제외 :";
+            this.label4.Text = "전화번호(-)포함 :";
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(273, 176);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.MaxLength = 5;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(170, 28);
@@ -108,8 +108,8 @@ namespace testdbwinform
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(273, 243);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox2.MaxLength = 11;
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.MaxLength = 13;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(170, 28);
             this.textBox2.TabIndex = 6;
@@ -117,7 +117,7 @@ namespace testdbwinform
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(273, 314);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.MaxLength = 15;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(170, 28);
@@ -138,7 +138,7 @@ namespace testdbwinform
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form3";
             this.Text = "Form3";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form3_FormClosed);
