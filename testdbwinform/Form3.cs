@@ -20,11 +20,11 @@ namespace testdbwinform
         //데이터 베이스 정보
         static string server = "localhost"; // local
         static string databaes = "mydb"; // db이름
-        //static string port = "3308"; // port 3308 사용
+        static string port = "3308"; // port 3308 사용
         //static string user = "root"; // 사용자
         //static string password = "!roottestdatabase23"; // password
         // 공통 db 설정
-        static string port = "3306";
+        //static string port = "3306";
         static string user = "test";
         static string password = "1234";
         // conn에 들어갈 정보
