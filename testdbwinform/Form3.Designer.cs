@@ -128,7 +128,6 @@ namespace testdbwinform
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BackgroundImage = global::testdbwinform.Properties.Resources.background;
             this.ClientSize = new System.Drawing.Size(720, 454);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);

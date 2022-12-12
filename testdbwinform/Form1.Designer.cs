@@ -29,9 +29,15 @@ namespace testdbwinform
         /// </summary>
         private void InitializeComponent()
         {
+<<<<<<< HEAD
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+=======
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+>>>>>>> merge_test
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -62,7 +68,11 @@ namespace testdbwinform
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+<<<<<<< HEAD
             this.button3 = new System.Windows.Forms.Button();
+=======
+            this.label4 = new System.Windows.Forms.Label();
+>>>>>>> merge_test
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -132,13 +142,18 @@ namespace testdbwinform
             this.commute,
             this.revenue});
             this.dataGridView1.Location = new System.Drawing.Point(41, 248);
+<<<<<<< HEAD
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+=======
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.MultiSelect = false;
+>>>>>>> merge_test
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(804, 256);
             this.dataGridView1.TabIndex = 13;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
             // casecode
@@ -322,19 +337,35 @@ namespace testdbwinform
             // 
             // chart1
             // 
+<<<<<<< HEAD
             chartArea2.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
+=======
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+>>>>>>> merge_test
             this.chart1.Location = new System.Drawing.Point(913, 248);
             this.chart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chart1.Name = "chart1";
+<<<<<<< HEAD
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             series2.YValuesPerPoint = 2;
             this.chart1.Series.Add(series2);
+=======
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            series1.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series1);
+>>>>>>> merge_test
             this.chart1.Size = new System.Drawing.Size(319, 405);
             this.chart1.TabIndex = 18;
             this.chart1.Text = "사원정보";
@@ -399,6 +430,7 @@ namespace testdbwinform
             this.comboBox1.Size = new System.Drawing.Size(121, 26);
             this.comboBox1.TabIndex = 22;
             // 
+<<<<<<< HEAD
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Black;
@@ -413,13 +445,27 @@ namespace testdbwinform
             this.button3.Text = "사원삭제";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+=======
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(599, 171);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 18);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "test";
+>>>>>>> merge_test
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1263, 722);
+<<<<<<< HEAD
             this.Controls.Add(this.button3);
+=======
+            this.Controls.Add(this.label4);
+>>>>>>> merge_test
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.comboBox5);
@@ -470,6 +516,7 @@ namespace testdbwinform
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox comboBox1;
+<<<<<<< HEAD
         private System.Windows.Forms.DataGridViewTextBoxColumn staffcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn name2;
         private System.Windows.Forms.DataGridViewTextBoxColumn tel;
@@ -479,6 +526,9 @@ namespace testdbwinform
         private System.Windows.Forms.DataGridViewTextBoxColumn commute2;
         private System.Windows.Forms.DataGridViewTextBoxColumn revenue2;
         private System.Windows.Forms.Button button3;
+=======
+        private System.Windows.Forms.Label label4;
+>>>>>>> merge_test
     }
 }
 

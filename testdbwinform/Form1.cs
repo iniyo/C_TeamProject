@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms; // 윈폼
 using MySql.Data.MySqlClient; // MySql 사용 시
 using System.Collections; //ArrayLIst 클래스 사용 시 
-
+using Google.Protobuf.WellKnownTypes;
 
 namespace testdbwinform
 {
@@ -19,11 +19,19 @@ namespace testdbwinform
         //데이터 베이스 정보
         static string server = "localhost";
         static string databaes = "mydb";
+<<<<<<< HEAD
         //static string port = "3308";
         //static string user = "root";
         //static string password = "!roottestdatabase23";
         // 공통 db 설정
         static string port = "3306";
+=======
+        static string port = "3308";
+        //static string user = "root";
+        //static string password = "!roottestdatabase23";
+        // 공통 db 설정
+        //static string port = "3306";
+>>>>>>> merge_test
         static string user = "test";
         static string password = "1234";
 
@@ -126,46 +134,50 @@ namespace testdbwinform
             Form3 form3 = new Form3();
             form3.Show(); // 모달방식
         }
+
         //datafridview1 행 클릭시 datafridview2에 데이터 추가됨.
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            rowselect = e.RowIndex; // 현재 선택된 행값을 가져옴.
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e) {
+            rowselect = e.RowIndex;
+
+            // 선택한 행의 데이터들을 넣을 값
             string[] s = new string[8];
+
             if (dataGridView2.RowCount > 0) // 이미 있는 경우는 삭제
             {
                 dataGridView2.Rows.Remove(dataGridView2.Rows[0]); // 해당되는 row 삭제
             }
+
             subquery(); // 사원 테이블
 
             while (subreader.Read()) // 데이터 읽어와서 chart에 부착
             {
-                if (dataGridView1.Rows[rowselect].Cells[1].Value.ToString() == subreader["staffcode"].ToString())
-                {
+                if (dataGridView1.Rows[rowselect].Cells[1].Value.ToString() == subreader["staffcode"].ToString()) {
+                    // 스태프 코드가 같으면
                     s[0] = subreader["staffcode"].ToString();
                     s[1] = subreader["name"].ToString();
                     s[2] = subreader["tel"].ToString();
                     s[3] = subreader["addr"].ToString();
                 }
             }
+
+            label4.Text = s[0];
             subreader.Close();
             // 데이터 가져와서 DataGridView에 설정
 
             string selectQuery = "SELECT * FROM main_table_test where table2_staffcode= " + "'" + s[0] + "'"; // 전체 항목 읽어오기
             cmd.CommandText = selectQuery; // cmd에 쿼리 설정
             mainreader = cmd.ExecuteReader();
+
+
             // sttafcode와 일치하는 모든 데이터의 값을 더해서 보여줌
             int sum1 = 0; // 배달건수 합계
             int sum2 = 0; // 합계 도
             int b = 3;
-            while (mainreader.Read())
-            {
+            while (mainreader.Read()) {
                 // 무사고 여부
-                if ("1" == mainreader["accident_free"].ToString())
-                {
+                if ("1" == mainreader["accident_free"].ToString()) {
                     s[4] = "사고";
-                }
-                else
-                {
+                } else {
                     s[4] = "무사고";
                 }
                 // 배달건수 
@@ -173,12 +185,9 @@ namespace testdbwinform
                 sum1 += int.Parse(mainreader["case_number"].ToString());
                 s[5] = sum1.ToString();
                 // 츨/퇴근
-                if ("1" == mainreader["commute"].ToString())
-                {
+                if ("1" == mainreader["commute"].ToString()) {
                     s[6] = "정상";
-                }
-                else
-                {
+                } else {
                     s[6] = "시간초과";
                 }
                 // 총 수익
@@ -192,6 +201,7 @@ namespace testdbwinform
             dataGridView2.Rows.Add(s[0], s[1], s[2], s[3], s[4], s[5], s[6], s[7]);
             delcode = dataGridView1.Rows[rowselect].Cells[0].Value.ToString(); // datagridview 1의 선택된 행의 caseNo를 담음
         }
+
         //datafrideview1 클릭 이벤트 (delete처리)
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
